@@ -1,0 +1,45 @@
+HELP.md
+### maven ###
+target/
+.mvn
+mvnw.cmd
+mvnw
+# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
+!/.mvn/wrapper/maven-wrapper.jar
+
+### Gradle ###
+!gradle/wrapper/gradle-wrapper.jar
+.gradle
+build/
+gradlew
+gradlew.bat
+
+### MISC ###
+.DS_Store⏎
+out/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
