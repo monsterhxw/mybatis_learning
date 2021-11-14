@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="github.hxw.mybatis.domain.customer.CustomerRepository">
+  <!-- 定义映射规则 -->
+  <resultMap id="customerMap" type="Customer">
+    <!-- 主键映射 -->
+    <id property="id" column="id"/>
+    <!-- 属性映射 -->
+    <result property="name" column="name"/>
+    <result property="phone" column="phone"/>
+  </resultMap>
+
+  <!-- 定义映射规则 -->
+  <resultMap id="customerWithAddressesMap" type="Customer">
+    <!-- 主键映射 -->
+    <id property="id" column="id"/>
+    <!-- 属性映射 -->
+    <result property="name" column="name"/>
+    <result property="phone" column="phone"/>
+    <!-- addresses 集合映射 <collection>标签用于映射集合类的属性，实现一对多的关联关系-->
+    <collection property="addresses" javaType="list" ofType="Address">
+      <!-- 主键映射 -->
+      <id property="id" column="address_id"/>
+      <!-- 属性映射 -->
+      <result property="street" column="street"/>
+      <result property="city" column="city"/>
+      <result property="country" column="country"/>
+    </collection>
+  </resultMap>
+  <!-- 定义 select 语句，CustomerRepository 接口中的 findById() 方法会执行该 SQL，
+        查询结果通过 customerMap 这个映射生成 CustomerEntity 对象-->
+  <select id="findById" parameterType="long" resultMap="customerMap">
+    SELECT *
+    FROM t_customer
+    WHERE id = #{id:BIGINT}
+  </select>
+
+  <!-- 定义 select 语句，CustomerRepository 接口中的 findByIdWithAddress() 方法会执行该 SQL，
+        查询结果通过 customerWithAddressesMap 这个映射生成 CustomerEntity 对象-->
+  <select id="findByIdWithAddress" parameterType="long" resultMap="customerWithAddressesMap">
+    SELECT c.*, a.address_id, a.*
+    FROM t_customer AS c
+           JOIN t_address AS a ON c.id = a.customer_id
+    WHERE c.id = #{id:BIGINT}
+  </select>
+
+  <!-- 定义 select 语句，CustomerRepository 接口中的 findByOrderId() 方法会执行该 SQL，
+        查询结果通过 customerMap 这个映射生成 CustomerEntity 对象 -->
+  <select id="findByOrderId" parameterType="long" resultMap="customerMap">
+    SELECT c.*
+    FROM t_customer AS c
+           JOIN t_order AS o ON c.id = o.customer_id
+    WHERE o.customer_id = #{id:BIGINT}
+  </select>
+
+  <!-- 定义insert语句，CustomerMapper接口中的save()方法会执行该SQL，
+        数据库生成的自增id会自动填充到传入的Customer对象的id字段中-->
+  <insert id="save" keyProperty="id" useGeneratedKeys="true">
+    INSERT INTO t_customer (id, name, phone)
+    VALUES (#{id:BIGINT}, #{name:VARCHAR}, #{phone:VARCHAR})
+  </insert>
+</mapper>

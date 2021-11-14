@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+  <!-- 定义属性值 -->
+  <properties>
+    <property name="username" value="root"/>
+    <property name="id" value="root"/>
+  </properties>
+
+  <!-- 全局配置信息 -->
+  <settings>
+    <setting name="cacheEnabled" value="true"/>
+  </settings>
+
+  <!-- 配置别名信息，在映射配置文件中可以直接使用 Customer 这个别名
+            代替 github.hxw.mybatis.domain.customer.CustomerEntity 这个类 -->
+  <typeAliases>
+    <typeAlias type="github.hxw.mybatis.domain.customer.CustomerEntity" alias="Customer"/>
+    <typeAlias type="github.hxw.mybatis.domain.customer.AddressEntity" alias="Address"/>
+    <typeAlias type="github.hxw.mybatis.domain.order.OrderEntity" alias="Order"/>
+    <typeAlias type="github.hxw.mybatis.domain.order.OrderItemEntity" alias="OrderItem"/>
+    <typeAlias type="github.hxw.mybatis.domain.product.ProductEntity" alias="Product"/>
+  </typeAliases>
+
+  <!-- 环境配置 -->
+  <environments default="development">
+    <environment id="development">
+      <!-- 配置事务管理器的类型 -->
+      <transactionManager type="JDBC"/>
+      <!-- 配置数据源的类型，以及数据库连接的相关信息 -->
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/mybatis_demo"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+      </dataSource>
+    </environment>
+  </environments>
+
+  <!-- 配置映射配置文件的位置 -->
+  <mappers>
+    <mapper resource="mapper/customer/CustomerMapper.xml"/>
+<!--    <mapper resource="mapper/customer/AddressMapper.xml"/>-->
+<!--    <mapper resource="mapper/order/OrderItemMapper.xml"/>-->
+<!--    <mapper resource="mapper/order/OrderMapper.xml"/>-->
+<!--    <mapper resource="mapper/product/ProductMapper.xml"/>-->
+  </mappers>
+</configuration>
