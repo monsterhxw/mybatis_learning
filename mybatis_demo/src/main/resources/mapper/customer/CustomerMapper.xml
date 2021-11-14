@@ -40,7 +40,7 @@
   <!-- 定义 select 语句，CustomerRepository 接口中的 findByIdWithAddress() 方法会执行该 SQL，
         查询结果通过 customerWithAddressesMap 这个映射生成 CustomerEntity 对象-->
   <select id="findByIdWithAddress" parameterType="long" resultMap="customerWithAddressesMap">
-    SELECT c.*, a.address_id, a.*
+    SELECT c.*, a.id as address_id, a.*
     FROM t_customer AS c
            JOIN t_address AS a ON c.id = a.customer_id
     WHERE c.id = #{id:BIGINT}

@@ -41,9 +41,9 @@
   <!-- 配置映射配置文件的位置 -->
   <mappers>
     <mapper resource="mapper/customer/CustomerMapper.xml"/>
-<!--    <mapper resource="mapper/customer/AddressMapper.xml"/>-->
-<!--    <mapper resource="mapper/order/OrderItemMapper.xml"/>-->
-<!--    <mapper resource="mapper/order/OrderMapper.xml"/>-->
-<!--    <mapper resource="mapper/product/ProductMapper.xml"/>-->
+    <mapper resource="mapper/customer/AddressMapper.xml"/>
+    <mapper resource="mapper/order/OrderItemMapper.xml"/>
+    <mapper resource="mapper/order/OrderMapper.xml"/>
+    <mapper resource="mapper/product/ProductMapper.xml"/>
   </mappers>
 </configuration>

@@ -25,6 +25,11 @@ public class OrderItemEntity {
     private OrderEntity order;
 
     /**
+     * 订单 ID
+     */
+    private Long orderId;
+
+    /**
      * 商品
      */
     private ProductEntity product;
